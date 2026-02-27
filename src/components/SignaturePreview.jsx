@@ -5,7 +5,6 @@ import { minifyHTML } from '../utils/htmlMinifier';
 const SignaturePreview = ({ formData, onBack }) => {
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState('preview');
-  const [useMinified, setUseMinified] = useState(false);
 
   const signatureHTML = generateSignatureHTML(formData);
   const minifiedHTML = minifyHTML(signatureHTML);
