@@ -6,6 +6,7 @@ import { doctypeWrapper } from '../utils/doctypeWrapper'
 
 const SignaturePreview = ({ formData, onBack }) => {
   const [activeTab, setActiveTab] = useState('preview')
+  const [copied, setCopied] = useState(false)
 
   const signatureHTML = generateSignatureHTML(formData)
   const minifiedHTML = minifyHTML(signatureHTML)
@@ -142,7 +143,7 @@ const SignaturePreview = ({ formData, onBack }) => {
               className="flex-1 rounded-lg border-2 px-6 py-4 font-semibold transition duration-200 hover:bg-orange-50"
               style={{ borderColor: '#ED7402', color: '#ED7402' }}
             >
-              Kopírovať HTML kód
+              {copied ? '✓ Skopírované!' : 'Kopírovať HTML kód'}
             </button>
           </div>
           <button
