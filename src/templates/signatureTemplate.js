@@ -1,15 +1,13 @@
 export const generateSignatureHTML = (data) => {
   const { name, surname, tel, mail, position } = data;
 
-return `<!-- START: Mayflower email signature (max compatibility snippet) -->
+return `
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0; padding:0; border-collapse:collapse;">
   <tr>
     <td align="left" style="margin:0; padding:0;">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="454" style="width:454px; border-collapse:collapse; font-family:Arial, sans-serif;" bgcolor="#FFFFFF">
         <tr>
           <td style="padding:0; margin:0; background-color:#FFFFFF;" bgcolor="#FFFFFF">
-
-            <!-- Logo Section -->
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="454" style="width:454px; border-collapse:collapse;">
               <tr>
                 <td style="padding:0 0 16px 0; margin:0;">
@@ -20,48 +18,29 @@ return `<!-- START: Mayflower email signature (max compatibility snippet) -->
                 </td>
               </tr>
             </table>
-
-            <!-- Content Section -->
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="454" style="width:454px; border-collapse:collapse;">
               <tr>
                 <td style="padding:0 0 0 28px; margin:0;">
                   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="424" style="width:424px; border-collapse:collapse;">
 
-                    <!-- Name -->
                     <tr>
-                      <td style="font-family:Arial, sans-serif; font-size:18px; font-weight:bold; color:#111111; line-height:22px; padding:0 0 8px 0; margin:0;">
-                        ${name} ${surname}
+                      <td style="font-family:Arial, sans-serif; font-size:18px; font-weight:bold; color:#111111; line-height:22px; padding:0 0 8px 0; margin:0;">${name} ${surname}</td>
+                    </tr>
+                    <tr>
+                      <td style="font-family:Arial, sans-serif; font-size:12px; font-weight:normal; color:#111111; line-height:16px; text-transform:uppercase; padding:0 0 12px 0; margin:0;">${position}</td>
+                    </tr>
+                    <tr>
+                      <td style="font-family:Arial, sans-serif; font-size:12px; color:#111111; line-height:17px; padding:0 0 4px 0; margin:0;">
+                        <a href="mailto:${mail}" style="font-family:Arial, sans-serif; color:#111111; text-decoration:underline;">${mail}</a>
                       </td>
                     </tr>
-
-                    <!-- Position -->
                     <tr>
-                      <td style="font-family:Arial, sans-serif; font-size:12.5px; font-weight:normal; color:#111111; line-height:16px; text-transform:uppercase; padding:0 0 12px 0; margin:0;">
-                        ${position}
+                      <td style="font-family:Arial, sans-serif; font-size:12px; color:#111111; line-height:17px; padding:0 0 12px 0; margin:0;">
+                        <a href="tel:${tel.replace(/\s/g, '')}" style="font-family:Arial, sans-serif; color:#111111; text-decoration:underline;">${tel}</a>
                       </td>
                     </tr>
-
-                    <!-- Email -->
                     <tr>
-                      <td style="font-family:Arial, sans-serif; font-size:12.5px; color:#111111; line-height:16.7px; padding:0 0 4px 0; margin:0;">
-                        <a href="mailto:${mail}" style="font-family:Arial, sans-serif; color:#111111; text-decoration:underline;">
-                         ${mail}
-                        </a>
-                      </td>
-                    </tr>
-
-                    <!-- Phone -->
-                    <tr>
-                      <td style="font-family:Arial, sans-serif; font-size:12.5px; color:#111111; line-height:16.7px; padding:0 0 12px 0; margin:0;">
-                        <a href="tel:${tel.replace(/\s/g, '')}" style="font-family:Arial, sans-serif; color:#111111; text-decoration:underline;">
-                          ${tel}
-                        </a>
-                      </td>
-                    </tr>
-
-                    <!-- Websites -->
-                    <tr>
-                      <td style="font-family:Arial, sans-serif; font-size:12.5px; font-weight:bold; color:#111111; line-height:16.7px; padding:0 0 16px 0; margin:0;">
+                      <td style="font-family:Arial, sans-serif; font-size:12px; font-weight:bold; color:#111111; line-height:17px; padding:0 0 16px 0; margin:0;">
                         <a href="https://mayflower.sk" style="font-family:Arial, sans-serif; color:#111111; text-decoration:none;">
                           mayflower.sk
                         </a>
@@ -71,13 +50,10 @@ return `<!-- START: Mayflower email signature (max compatibility snippet) -->
                         </a>
                       </td>
                     </tr>
-
-                    <!-- Award Badges -->
                     <tr>
                       <td style="padding:0 0 16px 0; margin:0;">
                         <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
                           <tr>
-                            <!-- Badge 1 -->
                             <td style="padding:0 16px 0 0; margin:0; vertical-align:top;">
                               <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
                                 <tr>
@@ -85,7 +61,7 @@ return `<!-- START: Mayflower email signature (max compatibility snippet) -->
                                     <img src="https://mayflower.hoere.eu/email_signature/2026/award_badge.png"
                                          alt="CIJ Award"
                                          width="34" height="41"
-                                         style="display:block; width:34px; height:41px; border:0; outline:none; text-decoration:none;" />
+                                         style="display:block; margin-top: 0 !important; margin-bottom: 0 !important; width:34px; height:41px; border:0; outline:none; text-decoration:none;" />
                                   </td>
                                   <td style="vertical-align:top; padding:0; margin:0;">
                                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
@@ -111,8 +87,6 @@ return `<!-- START: Mayflower email signature (max compatibility snippet) -->
                                 </tr>
                               </table>
                             </td>
-
-                            <!-- Badge 2 -->
                             <td style="padding:0; margin:0; vertical-align:top;">
                               <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
                                 <tr>
@@ -120,7 +94,7 @@ return `<!-- START: Mayflower email signature (max compatibility snippet) -->
                                     <img src="https://mayflower.hoere.eu/email_signature/2026/award_badge.png"
                                          alt="CIJ Award"
                                          width="34" height="41"
-                                         style="display:block; width:34px; height:41px; border:0; outline:none; text-decoration:none;" />
+                                         style="display:block; width:34px; height:41px; margin-top: 0 !important; margin-bottom: 0 !important; border:0; outline:none; text-decoration:none;" />
                                   </td>
                                   <td style="vertical-align:top; padding:0; margin:0;">
                                     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
@@ -151,8 +125,6 @@ return `<!-- START: Mayflower email signature (max compatibility snippet) -->
                         </table>
                       </td>
                     </tr>
-
-                    <!-- Spektrum Banner (note: rounded corners removed for Outlook compatibility) -->
                     <tr>
                       <td style="padding:0 0 16px 0; margin:0;">
                         <a href="https://ocspektrum.sk" style="display:block; text-decoration:none; border:0;">
@@ -163,14 +135,11 @@ return `<!-- START: Mayflower email signature (max compatibility snippet) -->
                         </a>
                       </td>
                     </tr>
-
-                    <!-- Disclaimer -->
                     <tr>
                       <td style="font-family:Arial, sans-serif; font-size:12px; font-weight:normal; color:#999999; line-height:15px; padding:0; margin:0;">
                         The information in this email is confidential and solely for the use of the intended recipient(s). If you receive this email in error, please notify the sender and delete the email from your system immediately. In such circumstances, you must not make any use of the email or its contents. Mayflower Group s.r.o.
                       </td>
                     </tr>
-
                   </table>
                 </td>
               </tr>
@@ -179,9 +148,7 @@ return `<!-- START: Mayflower email signature (max compatibility snippet) -->
           </td>
         </tr>
       </table>
-      <!-- /Fixed-width container -->
     </td>
   </tr>
 </table>
-<!-- END: Mayflower email signature -->`
-};
+`};

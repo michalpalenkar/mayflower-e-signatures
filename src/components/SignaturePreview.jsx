@@ -3,7 +3,6 @@ import { generateSignatureHTML } from '../templates/signatureTemplate';
 import { minifyHTML } from '../utils/htmlMinifier';
 
 const SignaturePreview = ({ formData, onBack }) => {
-  const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState('preview');
 
   const signatureHTML = generateSignatureHTML(formData);
@@ -20,33 +19,33 @@ const SignaturePreview = ({ formData, onBack }) => {
     }
   };
 
-  const copyPreview = async () => {
+  const openInNewTab = () => {
     try {
-      // Create a temporary container with the signature HTML
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = minifiedHTML;
-      tempDiv.style.position = 'absolute';
-      tempDiv.style.left = '-9999px';
-      document.body.appendChild(tempDiv);
+      // Create a complete HTML document with the signature
+      const fullHTML = `
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body bgcolor="#ffffff" cz-shortcut-listen="true" style="margin: 0;padding: 0;min-width: 100%!important;">
+<body>
+  ${minifiedHTML}
+</body>
+</html>
+      `.trim();
 
-      // Select all content in the temporary div
-      const range = document.createRange();
-      range.selectNodeContents(tempDiv);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
+      // Create a Blob from the HTML content
+      const blob = new Blob([fullHTML], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
 
-      // Copy the selected content (includes formatting)
-      document.execCommand('copy');
+      // Open in a new tab
+      window.open(url, '_blank');
 
-      // Clean up
-      selection.removeAllRanges();
-      document.body.removeChild(tempDiv);
-
-      setCopied(true);
-      setTimeout(() => setCopied(false), 3000);
+      // Clean up the URL after a short delay
+      setTimeout(() => URL.revokeObjectURL(url), 100);
     } catch (err) {
-      console.error('Failed to copy preview:', err);
+      console.error('Failed to open preview:', err);
     }
   };
 
@@ -103,11 +102,11 @@ const SignaturePreview = ({ formData, onBack }) => {
         <div className="flex flex-col gap-4 mb-8">
           <div className="flex gap-4">
             <button
-              onClick={copyPreview}
+              onClick={openInNewTab}
               className="flex-1 text-white font-semibold py-4 px-6 rounded-lg transition duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 hover:opacity-90"
               style={{ backgroundColor: '#ED7402' }}
             >
-              {copied ? '✓ Skopírované!' : 'Kopírovať náhľad (odporúčané)'}
+              Otvoriť v novej záložke (odporúčané)
             </button>
             <button
               onClick={copyToClipboard}
