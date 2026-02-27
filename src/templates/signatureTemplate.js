@@ -1,7 +1,7 @@
 export const generateSignatureHTML = (data) => {
-  const { name, surname, tel, mail, position } = data;
+  const { name, surname, tel, mail, position } = data
 
-return `
+  return `
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0; padding:0; border-collapse:collapse;">
   <tr>
     <td align="left" style="margin:0; padding:0;">
@@ -144,11 +144,11 @@ return `
                 </td>
               </tr>
             </table>
-
           </td>
         </tr>
       </table>
     </td>
   </tr>
 </table>
-`};
+`
+}
