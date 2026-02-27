@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { generateSignatureHTML } from '../templates/signatureTemplate';
 import { minifyHTML } from '../utils/htmlMinifier';
+import slugify from 'slugify';
 
 const SignaturePreview = ({ formData, onBack }) => {
   const [activeTab, setActiveTab] = useState('preview');
@@ -45,6 +46,50 @@ const SignaturePreview = ({ formData, onBack }) => {
       setTimeout(() => URL.revokeObjectURL(url), 100);
     } catch (err) {
       console.error('Failed to open preview:', err);
+    }
+  };
+
+  const saveAsHTML = () => {
+    try {
+      // Create a complete HTML document with the signature (same as openInNewTab)
+      const fullHTML = `
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin: 0;padding: 0;min-width: 100%!important;">
+  ${minifiedHTML}
+</body>
+</html>
+      `.trim();
+
+      // Minify the full HTML (remove extra whitespace between tags)
+      const minifiedFullHTML = fullHTML.replace(/>\s+</g, '><');
+
+      // Create filename from formData (name-surname.html)
+      const firstName = formData.name?.trim() || 'podpis';
+      const lastName = formData.surname?.trim() || '';
+      const slugifiedName = slugify(firstName, { lower: true, strict: true });
+      const slugifiedSurname = lastName ? slugify(lastName, { lower: true, strict: true }) : '';
+      const filename = slugifiedSurname ? `${slugifiedName}-${slugifiedSurname}.html` : `${slugifiedName}.html`;
+
+      // Create a Blob from the minified HTML content
+      const blob = new Blob([minifiedFullHTML], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+
+      // Create a temporary anchor element and trigger download
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      // Clean up the URL
+      setTimeout(() => URL.revokeObjectURL(url), 100);
+    } catch (err) {
+      console.error('Failed to save HTML:', err);
     }
   };
 
@@ -115,6 +160,13 @@ const SignaturePreview = ({ formData, onBack }) => {
               Kopírovať HTML kód
             </button>
           </div>
+          <button
+            onClick={saveAsHTML}
+            className="w-full border-2 font-semibold py-4 px-6 rounded-lg transition duration-200 hover:bg-orange-50"
+            style={{ borderColor: '#ED7402', color: '#ED7402' }}
+          >
+            💾 Stiahnuť ako HTML súbor
+          </button>
           <button
             onClick={onBack}
             className="px-6 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition duration-200"
