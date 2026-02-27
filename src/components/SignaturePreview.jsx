@@ -28,7 +28,7 @@ const SignaturePreview = ({ formData, onBack }) => {
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-<body bgcolor="#ffffff" cz-shortcut-listen="true" style="margin: 0;padding: 0;min-width: 100%!important;">
+<body style="margin: 0;padding: 0;min-width: 100%!important;">
   ${minifiedHTML}
 </body>
 </html>
