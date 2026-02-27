@@ -1,16 +1,55 @@
+import { useState } from 'react';
+import SignatureForm from './components/SignatureForm';
+import SignaturePreview from './components/SignaturePreview';
+import DevSignaturePreview from './components/DevSignaturePreview';
+
+const isDevelopment = import.meta.env.DEV;
+
 function App() {
+  const [generatedSignature, setGeneratedSignature] = useState(null);
+  const [showDevPreview, setShowDevPreview] = useState(false);
+
+  const handleGenerate = (formData) => {
+    setGeneratedSignature(formData);
+  };
+
+  const handleBack = () => {
+    setGeneratedSignature(null);
+  };
+
+  const toggleDevPreview = () => {
+    setShowDevPreview(!showDevPreview);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-      <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full mx-4">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4 text-center">
-          Hello World
-        </h1>
-        <p className="text-gray-600 text-center">
-          Welcome to your Vite + React + Tailwind CSS app!
-        </p>
+    <div className="min-h-screen py-12 bg-gray-100">
+      {/* Development Mode Toggle - Only visible in dev */}
+      {isDevelopment && (
+        <div className="fixed top-4 right-4 z-50">
+          <button
+            onClick={toggleDevPreview}
+            className={`px-4 py-2 rounded-lg font-semibold shadow-lg transition transform hover:scale-105 ${
+              showDevPreview
+                ? 'bg-red-600 text-white hover:bg-red-700'
+                : 'bg-purple-600 text-white hover:bg-purple-700'
+            }`}
+          >
+            {showDevPreview ? '🔧 Exit Dev Mode' : '🔧 Dev Preview'}
+          </button>
+        </div>
+      )}
+
+      <div className="container mx-auto">
+        {isDevelopment && showDevPreview ? (
+          <DevSignaturePreview />
+        ) : !generatedSignature ? (
+          <SignatureForm onGenerate={handleGenerate} />
+        ) : (
+          <SignaturePreview formData={generatedSignature} onBack={handleBack} />
+        )}
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
