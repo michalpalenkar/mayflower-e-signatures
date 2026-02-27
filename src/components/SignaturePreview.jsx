@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { generateSignatureHTML } from '../templates/signatureTemplate'
 import { minifyHTML } from '../utils/htmlMinifier'
 import slugify from 'slugify'
+import { doctypeWrapper } from '../utils/doctypeWrapper'
 
 const SignaturePreview = ({ formData, onBack }) => {
   const [activeTab, setActiveTab] = useState('preview')
