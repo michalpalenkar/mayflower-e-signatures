@@ -5,13 +5,13 @@ export const generateSignatureHTML = (data) => {
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0; padding:0; border-collapse:collapse;">
   <tr>
     <td align="left" style="margin:0; padding:0;">
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="454" style="width:454px; border-collapse:collapse; font-family:Arial, sans-serif;" bgcolor="#FFFFFF">
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="454" style="width:454px; border-collapse:collapse; font-family:Arial, sans-serif;">
         <tr>
-          <td style="padding:0; margin:0; background-color:#FFFFFF;" bgcolor="#FFFFFF">
+          <td style="padding:0; margin:0;">
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="454" style="width:454px; border-collapse:collapse;">
               <tr>
                 <td style="padding:0 0 16px 0; margin:0;">
-                  <img src="https://mayflower.hoere.eu/email_signature/2026/mayflower_logo.png"
+                  <img src="https://mayflower.hoere.eu/email_signature/2026/mayflower.png"
                        alt="Mayflower"
                        width="150" height="148"
                        style="display:block; width:150px; height:148px; border:0; outline:none; text-decoration:none;" />
