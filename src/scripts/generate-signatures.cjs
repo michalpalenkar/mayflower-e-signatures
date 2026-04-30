@@ -9,10 +9,7 @@ const people = xlsx.utils.sheet_to_json(sheet)
 
 // Inline the template and utils (no ESM imports)
 function minifyHTML(html) {
-  return html
-    .replace(/\s+/g, ' ')
-    .replace(/>\s+</g, '><')
-    .trim()
+  return html.replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim()
 }
 
 function slugify(str) {
@@ -153,7 +150,7 @@ function generateSignatureHTML(data) {
                     <tr>
                       <td style="padding:0 0 16px 0; margin:0;">
                         <a href="https://ocspektrum.sk" style="display:block; text-decoration:none; border:0;">
-                          <img src="https://mayflower.hoere.eu/email_signature/2026/oc_spektrum_banner.png"
+                          <img src="https://mayflower.hoere.eu/email_signature/2026/oc_spektrum_banner2.png"
                                alt="Spektrum Banner"
                                width="424" height="96"
                                style="display:block; width:424px; height:auto; max-width:424px; border:0; outline:none; text-decoration:none;" />
@@ -218,13 +215,21 @@ for (const person of people) {
   const mail = (person['Mail '] || '').trim()
   const position = (person['Pozícia'] || '').trim()
 
-  const signatureHTML = generateSignatureHTML({ name, surname, tel, mail, position })
+  const signatureHTML = generateSignatureHTML({
+    name,
+    surname,
+    tel,
+    mail,
+    position,
+  })
   const fullHTML = doctypeWrapper(signatureHTML)
 
   const base = `${slugify(name)}-${slugify(surname)}`
   const isDuplicate = nameCounts[`${name} ${surname}`] > 1
   const emailPrefix = mail.split('@')[0]
-  const filename = isDuplicate ? `${base}-${slugify(emailPrefix)}.html` : `${base}.html`
+  const filename = isDuplicate
+    ? `${base}-${slugify(emailPrefix)}.html`
+    : `${base}.html`
   const filepath = path.join(outputDir, filename)
 
   fs.writeFileSync(filepath, fullHTML, 'utf8')

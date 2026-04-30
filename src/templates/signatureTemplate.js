@@ -128,7 +128,7 @@ export const generateSignatureHTML = (data) => {
                     <tr>
                       <td style="padding:0 0 16px 0; margin:0;">
                         <a href="https://ocspektrum.sk" style="display:block; text-decoration:none; border:0;">
-                          <img src="https://mayflower.hoere.eu/email_signature/2026/oc_spektrum_banner.png"
+                          <img src="https://mayflower.hoere.eu/email_signature/2026/oc_spektrum_banner2.png"
                                alt="Spektrum Banner"
                                width="424" height="96"
                                style="display:block; width:424px; height:auto; max-width:424px; border:0; outline:none; text-decoration:none;" />
